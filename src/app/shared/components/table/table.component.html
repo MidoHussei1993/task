@@ -1,0 +1,114 @@
+ 
+
+<div class="row mt-2">
+   
+  <div class="">
+    <table
+      class="table table-hover table-rounded table-striped border gy-7 gs-7"
+    >
+      <thead class="text-dark" style="background: #d0e1fd">
+        <tr class="">
+          
+          <th
+            *ngFor="let title of titles; let i = index"
+            class="text-center property-title"
+          >
+            <i
+              class="fa fa-caret-up pointer px-1"
+              [ngClass]="{
+                'text-success':
+                  sortedProperty.title == title &&
+                  sortedProperty.sortType == 'up'
+              }"
+              (click)="sortData('up', i, title)"
+              aria-hidden="true"
+            ></i>
+            <i
+              [ngClass]="{
+                'text-success':
+                  sortedProperty.title == title &&
+                  sortedProperty.sortType == 'down'
+              }"
+              (click)="sortData('down', i, title)"
+              class="fa fa-caret-down pointer px-1"
+              aria-hidden="true"
+            ></i>
+            <span>
+              {{ title  }}
+            </span>
+          </th>
+         
+          <th
+            *ngIf="
+              (showDelete || showEdit || showView || addActions) && hideActions
+            "
+            class="text-center"
+          >
+            {{ " actions"  }}
+          </th>
+        </tr>
+      </thead>
+      <tbody>
+        <!-- [pTooltip]="getObjectData(item)" -->
+        <tr
+          *ngFor="let item of list; let i = index"
+          class="slideDown"
+          [attr.data-change-color]="item.changeColour ? true : false"
+          [attr.data-partner]="item.isPartner == true ? true : ''"
+          [attr.data-not-partner]="item.isPartner == false ? false : ''"
+          tooltipPosition="left" 
+        >
+          <td
+            class="text-center font-weight-bolder px-2"
+            *ngIf="pagination.pageNumber"
+          >
+            <h5>
+              <strong>
+                {{ i + 1 + (pagination.pageNumber - 1) * pagination.pageSize }}
+              </strong>
+            </h5>
+          </td>
+          <td
+            [attr.data-prop]="prop"
+            [attr.data-value]="item[prop]"
+            *ngFor="let prop of properties"
+            class="text-center"
+          >
+          
+              {{ item[prop] }}
+           
+          </td>
+           
+        
+          <td
+            class="text-center"
+            *ngIf="
+              (showDelete || showEdit || showView || addActions) && hideActions
+            "
+          >
+            <i
+              title="{{ 'View'  }}"
+              class="far fa-eye text-primary mx-1"
+              *ngIf="showView"
+              (click)="View(item)"
+            ></i>
+            <i
+              title="{{ 'Edit'  }}"
+              class="far fa-edit text-warning mx-2 "
+              *ngIf="showEdit"
+              (click)="Edit(item)"
+            ></i>
+            <i
+              title="{{ 'Delete'  }}"
+              class="fa fa-trash text-danger mx-1"
+              *ngIf="showDelete"
+              (click)="Delete(item)"
+            ></i>
+          
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+ 

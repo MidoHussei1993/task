@@ -1,0 +1,104 @@
+<div class="card bg-light">
+    <div class="card-body">
+        <div class="d-flex justify-content-between align-items-center">
+            <h2>{{ mode }} - Employee</h2>
+          </div>
+          <form [formGroup]="form" (ngSubmit)="submit()">
+            <div class="row mt-3">
+              <div class="col-md-6 col-sm-12">
+                <label class="form-label">name</label>
+                <input
+                  type="text"
+                  formControlName="name"
+                  class="form-control form-control-solid"
+                  placeholder="name"
+                />
+                <div class="text text-danger">
+                  @if( !form.get('name')?.valid && (form.get('name')?.dirty ||
+                  form.get('name')?.touched)){
+                  @if(form.get('name')?.hasError('required')){
+                  <small class="text-danger mt-1">this field is required</small>
+                  }
+                  @if(form.get('name')?.hasError('minlength')){
+                      <small class="text-danger mt-2">text minLength is 3</small>
+                      }
+                   }
+                </div>
+              </div>
+          
+              <div class="col-md-6 col-sm-12">
+                <label class="form-label">position</label>
+                <input
+                  type="text"
+                  formControlName="position"
+                  class="form-control form-control-solid"
+                  placeholder="position"
+                />
+                <div class="text text-danger">
+                  @if( !form.get('position')?.valid && (form.get('position')?.dirty ||
+                  form.get('position')?.touched)){
+                  @if(form.get('position')?.hasError('required')){
+                  <p class="text-danger mt-1">this field is required</p>
+                  }
+                  @if(form.get('position')?.hasError('minlength')){
+                      <small class="text-danger mt-2">text minLength is 3</small>
+                      }
+                   }
+                </div>
+              </div>
+            </div>
+            <div class="row mt-3">
+              <div class="col-md-6 col-sm-12">
+                <label class="form-label">department</label>
+                <input
+                  type="text"
+                  formControlName="department"
+                  class="form-control form-control-solid"
+                  placeholder="department"
+                />
+                <div class="text text-danger">
+                  @if( !form.get('department')?.valid && (form.get('department')?.dirty ||
+                  form.get('department')?.touched)){
+                  @if(form.get('department')?.hasError('required')){
+                  <small class="text-danger mt-1">this field is required</small>
+                  }
+                  @if(form.get('department')?.hasError('minlength')){
+                      <small class="text-danger mt-2">text minLength is 3</small>
+                      }
+                   }
+                </div>
+              </div>
+              <div class="col-md-6 col-sm-12">
+                <label class="form-label">salary</label>
+                <input
+                  type="number"
+                  formControlName="salary"
+                  class="form-control form-control-solid"
+                  placeholder="salary"
+                />
+                <div class="text text-danger">
+                  @if( !form.get('salary')?.valid && (form.get('salary')?.dirty ||
+                  form.get('salary')?.touched)){
+                  @if(form.get('salary')?.hasError('required')){
+                  <small class="text-danger mt-1">this field is required</small>
+                  }
+                  @if(form.get('salary')?.hasError('min')){
+                      <small class="text-danger mt-2">this field should be greater than or equal to zero</small>
+                      }
+              }
+                </div>
+              </div>
+            </div>
+            @if(mode != 'View'){<div class="row my-5" >
+              <div class="col-md-4 col-sm-12 mx-auto text-center">
+                <button type="submit" class="btn btn-primary btn-block btn-hover-scale" [disabled]="busyLoading">
+                  <i class="fa-solid fa-file"></i>
+                  save
+                </button>
+              </div>
+            </div>
+          }
+          </form>
+          
+    </div>
+</div>
